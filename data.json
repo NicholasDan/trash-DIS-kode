@@ -1,0 +1,64 @@
+{
+  "routers": [
+    {
+      "router": 0,
+      "connections": [
+        {
+          "to": 1,
+          "cost": 1
+        },
+        {
+          "to": 2,
+          "cost": 3
+        },
+        {
+          "to": 3,
+          "cost": 7
+        }
+      ]
+    },
+    {
+      "router": 1,
+      "connections": [
+        {
+          "to": 0,
+          "cost": 1
+        },
+        {
+          "to": 2,
+          "cost": 1
+        }
+      ]
+    },
+    {
+      "router": 2,
+      "connections": [
+        {
+          "to": 0,
+          "cost": 3
+        },
+        {
+          "to": 1,
+          "cost": 1
+        },
+        {
+          "to": 3,
+          "cost": 2
+        }
+      ]
+    },
+    {
+      "router": 3,
+      "connections": [
+        {
+          "to": 0,
+          "cost": 7
+        },
+        {
+          "to": 2,
+          "cost": 2
+        }
+      ]
+    }
+  ]
+}

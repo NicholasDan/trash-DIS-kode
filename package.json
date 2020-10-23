@@ -1,0 +1,18 @@
+{
+  "name": "DIS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seaport": "./node_modules/.bin/seaport"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-graph-algorithms": "^1.0.18",
+    "node-fetch": "^2.6.1",
+    "prompt": "^1.0.0",
+    "seaport": "^2.0.9"
+  }
+}
