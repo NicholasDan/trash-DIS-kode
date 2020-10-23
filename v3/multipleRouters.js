@@ -12,14 +12,6 @@ const multipleRouters = () => {
      * 1. Iterate through the data and create the routers from it
      * as well as add it to our array.
      */
-    let dataArray = []
-
-
-    let packet2 = new Packet(dataArray.id = dataArray[0], dataArray.id = dataArray[1]);
-
-    console.log(dataArray);
-    console.log(packet2);
-    console.log(packet2.id);
 
     data.routers.forEach(router => {
 
@@ -30,7 +22,7 @@ const multipleRouters = () => {
         //pusher r ind som et element i 'routers' array'et
         routers.push(r);
     })
-        console.log(routers); // routers != r ??
+       // console.log(routers); // routers != r ??
     /**
      * 2. build a weighted directional graph and adds the edges
      * between the nodes through the data.json file
@@ -66,7 +58,7 @@ const multipleRouters = () => {
     // djikstra shortest path algoritmen bruges (graf, fra, til)
     packet.shortestPath = getShortestPath(g, packet.source, packet.destination);
 
-    console.log(packet.shortestPath);
+    console.log(packet.shortestPath); //[1,2,3]
 
 
     /**
@@ -79,6 +71,7 @@ const multipleRouters = () => {
     prompt.get(["sendPacket"], function(err, res) {
         if(res.sendPacket == "y") {
             packet.forwardPacket(packet.source);
+
         }
         else {
             console.log("Bye!")
@@ -87,19 +80,21 @@ const multipleRouters = () => {
     })
 
 }
-
 /**
  * This methods gets the router names / indexes on the shortest path.
  */
 
 const getShortestPath = (graph, from, to) => {
+    //Her instantierer vi hans algoritme. Den er pefekt algoritem  til opgaven, da den tager udgangspunkt i vægtede directional grafer.
     let dijkstra = new jsgraphs.Dijkstra(graph, from);
-    console.log(dijkstra);
+    //console.log(dijkstra);
+    //Her ser vi vha boolean om der er en tilgængelig rute til destiantionen fra grafen.
     if(dijkstra.hasPathTo(to)){
         //Nedenstående retunerer shortest-path fra router 0-3 som rute [1, 2, 3]
+
         return dijkstra.pathTo(to).map(edge => edge.to());
     }
-    else return null;
+    else return console.log("Desværre findes der ingen rute til routeren");
 };
 
 multipleRouters();

@@ -73,10 +73,13 @@ class Packet{
     .reverse() vender derefter rækkefølgen af alle elementer i et array. Så arrayet "vendes om" og ved position[0] får man derfor port nummeret
      */
 
-    //Funktionen funker ikke
+    //Funktionen funker ikke af en eller anden grund
     forwardPacket(to) {
 
         let sourceRouter = ports.query("router"+to)[0];
+       // console.log(sourceRouter);
+       // console.log(ports);
+
         var host = sourceRouter.host.split(":").reverse()[0];
         var port = sourceRouter.port;
 
