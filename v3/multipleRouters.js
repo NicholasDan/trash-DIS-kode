@@ -12,6 +12,14 @@ const multipleRouters = () => {
      * 1. Iterate through the data and create the routers from it
      * as well as add it to our array.
      */
+    let dataArray = []
+
+
+    let packet2 = new Packet(dataArray.id = dataArray[0], dataArray.id = dataArray[1]);
+
+    console.log(dataArray);
+    console.log(packet2);
+    console.log(packet2.id);
 
     data.routers.forEach(router => {
 
@@ -31,7 +39,7 @@ const multipleRouters = () => {
     /* Directional graf --> Én retning
        Weighted graf - en simpel graf med weigthed edges.
        Har et sæt af Vertices V, et sæt af edges E.
-       Har en (weight) W, som her er givet ved cost. Summen af alle weights = 1 */
+       Har en (weight) W, som her er givet ved cost. */
 
     // tilføjer antal vertices til grafen. En for hver router i data filen.
     let g = new jsgraphs.WeightedDiGraph(data.routers.length);
@@ -40,7 +48,7 @@ const multipleRouters = () => {
     data.routers.forEach(router => {
         //Hent alle dens connections
         router.connections.forEach(c => {
-            //fra hver connection, tilføj en edge. Fra (router, til router connection, cost connectionen
+            //fra hver connection, tilføj en edge. Fra (router, til router connection, cost til connectionen
             g.addEdge(new jsgraphs.Edge(router.router, c.to, c.cost))
         })
     })
@@ -66,14 +74,11 @@ const multipleRouters = () => {
      * Can be found here: https://github.com/flatiron/prompt#readme
      */
 
-
-
     prompt.start();
     console.log("Packet initialized. Send packet? (y/n)")
     prompt.get(["sendPacket"], function(err, res) {
         if(res.sendPacket == "y") {
-
-            packet.forwardPacket(packet.destination);
+            packet.forwardPacket(packet.source);
         }
         else {
             console.log("Bye!")

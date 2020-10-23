@@ -23,8 +23,6 @@ class Router{
 
             let dataArray = [];
 
-
-
             //Jeg tilgår http headers ved brug af en chunkListener der pusher chunks in i arrayet 'data' når
             // requestListeneren modtager en klienside request af eventypen 'data'
             req.on('data', chunk => {
@@ -36,16 +34,39 @@ class Router{
                 if(dataArray.length > 0) {
                     //1. decipher data. hint: JSON.parse()
 
-                    console.log("Data i router " + self.name + ": ")
+                    console.log("Data i router " + self.name+ ": ")
 
                     dataArray = JSON.parse(dataArray); // JSON strings der ligger i dataArray parses til js-objekter
 
                     console.log(dataArray);
 
                     //2. reconstruct the packet from the data.
+                                // endnu en dum ide....
+                    let packet = new Packet(dataArray.id = dataArray[0], dataArray.source = dataArray[1],
+                        dataArray.destination = dataArray[2], dataArray.ttl=dataArray[3],
+                        dataArray.routingHistory=dataArray[4], dataArray.shortestPath=dataArray[5]);
 
-                    let packet = new Packet(id, source, destination, ttl, routingHistory, shortestPath);
-                    /*  dataArray.forEach(router => {
+                       console.log(packet);
+                       console.log(dataArray.id)
+
+                    /* Dum idé
+                    dataArray.forEach(obj => {
+                        if(obj == packet.id){
+                            let id = obj;
+
+                        } if(obj == packet.source){
+                            let source = obj;
+                        }
+                        if(obj == packet.destination){
+                            let destination = obj;
+                        }
+                        if(obj == packet.ttl){
+                            let ttl = obj;
+                        }
+                    })
+                */
+                    /*
+                     dataArray.forEach(router => {
                         let source = router.name;
                         let con = router.connections;
                             con.forEach(con => {
@@ -53,15 +74,14 @@ class Router{
                                let cost = con[1]
                             })
                     })
-                    */
-
+                      */
                     console.log("Packet " + packet.id + " received at router " + self.name);
 
                     if(packet.destination === self.name)
                     {
                         // 3. What to do if packet has reached destination?
 
-                        //data streamet stopper - kan ikke teste
+                        //data streamet stopper
                         if(dataArray.path.length === 0) {
                             res.end(JSON.stringify(dataArray)); //send et response - Stringify javascript objekter tilbage til JSON string
                         }
@@ -71,7 +91,9 @@ class Router{
                             // Hint: should be an int.
 
                             // Skal finde den næste ruter (har ikke kunnet teste om det virker)
-                            let forwardTo = packet.forwardPacket(destination); //metodens connection skal fikses
+                            let forwardTo = packet.forwardPacket(packet.destination); //metodens connection skal fikses
+
+                    console.log(forwardTo);
 
                     // get the connection object (routeTo).
                     // consists of a "to" and a "cost".
@@ -84,6 +106,10 @@ class Router{
 
                     // 6. Add an extra field to routeTo named ttl with same value as the packet's ttl.
                     // remember the object notation of objects in javascript.
+
+
+
+
 
 
 
